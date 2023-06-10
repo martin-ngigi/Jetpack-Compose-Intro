@@ -18,6 +18,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,6 +26,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.jetpack_compose_intro.ui.theme.JetpackComposeIntroTheme
+import org.w3c.dom.NameList
+import java.util.jar.Attributes.Name
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -74,22 +77,31 @@ class MainActivity : ComponentActivity() {
                     }
 
                     /// List of names
-                    LazyColumn{
-                        items(names){currentName ->
-                            Text(
-                                text = currentName,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp)
-                            )
-
-                            Divider()
-                        }
-                    }
+                    NameList(names = names, )
 
                 }
             }
         }
     }
+}
+
+@Composable
+fun NameList(
+    names: List<String>,
+    modifier: Modifier= Modifier
+) {
+    LazyColumn{
+        items(names){currentName ->
+            Text(
+                text = currentName,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            )
+
+            Divider()
+        }
+    } 
+
 }
 
